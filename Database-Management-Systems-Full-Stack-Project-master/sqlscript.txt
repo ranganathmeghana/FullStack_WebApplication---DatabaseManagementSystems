@@ -1,0 +1,162 @@
+Create table Country(
+ country_id Integer,
+ country_name varchar2(30) not null,
+ primary key(country_id)
+);
+
+create table League(
+ League_id INTEGER,
+ League_name VARCHAR2(40) NOT NULL,
+ Country_id INTEGER NOT NULL REFERENCES Country(Country_id),
+ PRIMARY KEY (League_id)
+)
+
+create table player(
+ Player_id INTEGER,
+ Player_name VARCHAR2(50) NOT NULL,
+ Birthday varchar2(20) NOT NULL,
+ Height NUMERIC (5,2) NOT NULL CHECK (Height > 0 AND Height< 230.00),
+ Weight INTEGER NOT NULL CHECK (Weight > 0 AND Weight < 300),
+ PRIMARY KEY (Player_id)
+);
+
+
+CREATE TABLE Player_Attributes(
+ Player_id INTEGER REFERENCES Player(Player_id),
+ Date_ varchar2(20) NOT NULL,
+ Overall_rating integer,
+ potential integer,
+ preferred_foot VARCHAR2(8),
+ Attack_work_rate varchar2(10),
+ Defensive_Work_rate varchar2(10),
+ Finishing INTEGER,
+ Heading_accuracy INTEGER,
+  short_Passing INTEGER,
+ Free_kick_accuracy INTEGER,
+  long_passing Integer,
+   Ball_control INTEGER,
+    Sprint_speed INTEGER,
+	agility INTEGER,
+  	reaction INTEGER,
+	shot_power INTEGER,
+ Stamina INTEGER,
+ Strength Integer,
+ long_shots INTEGER,
+ aggression INTEGER,
+ positioning INTEGER,
+ Penalties INTEGER,
+ standing_Tackle INTEGER,
+  sliding_Tackle INTEGER,
+GK_Diving INTEGER,
+ GK_handling INTEGER,
+ GK_positioning INTEGER,
+ GK_Kicking INTEGER,
+ GK_reflexes INTEGER
+ );
+ 
+ for player_attribute columns to be eliminated are 1, 2, 10, 14, 15, 16, 20, ,24, 26, 31, 33, 35
+ 
+ 
+ CREATE TABLE Team (
+ Team_id INTEGER,
+ Team_long_name VARCHAR2(30) NOT NULL,
+ Team_short_name VARCHAR2(5) NOT NULL,
+ PRIMARY KEY (Team_id)
+);
+
+
+
+CREATE TABLE Team_attributes (
+Team_id INTEGER NOT NULL REFERENCES Team(Team_id),
+date_ varchar2(20),
+ BuildUp_play_speed varchar2(15),
+ BuildUp_play_dribbling varchar2(15),
+ Buildup_play_passing varchar2(15),
+ BuildUp_play_positioning varchar2(15),
+ chance_creation_passing varchar2(15),
+ chance_creation_crossing varchar2(15),
+ chance_creation_shooting varchar2(15),
+ chance_creation_positioning varchar2(15),
+ defence_pressure varchar2(15),
+ Defence_aggression varchar2(15),
+ Defence_team_width varchar2(15),
+ Defence_defender_line varchar2(15)
+ 
+);
+
+column deleted 2, 5, 7 ,9 , 12, 14, 16, 19, 21, 23
+
+
+
+CREATE TABLE Matches (
+ Country_id INTEGER NOT NULL REFERENCES Country(Country_id),
+ League_id INTEGER NOT NULL REFERENCES League(League_id),
+ Season VARCHAR2(10) NOT NULL,
+ Stage INTEGER NOT NULL,
+ Date_ varchar2(20) NOT NULL,
+ Match_id INTEGER,
+ home_team integer not null references team(team_id),
+ away_team integer not null references team(team_id),
+Home_team_goal INTEGER,
+Away_team_goal INTEGER,
+home_player_1 integer  references player(player_id),
+home_player_2 integer  references player(player_id),
+home_player_3 integer references player(player_id),
+home_player_4 integer  references player(player_id),
+home_player_5 integer references player(player_id),
+home_player_6 integer references player(player_id),
+home_player_7 integer references player(player_id),
+home_player_8 integer references player(player_id),
+home_player_9 integer references player(player_id),
+home_player_10 integer references player(player_id),
+home_player_11 integer references player(player_id),
+away_player_1 integer references player(player_id),
+away_player_2 integer references player(player_id),
+away_player_3 integer references player(player_id),
+away_player_4 integer references player(player_id),
+away_player_5 integer references player(player_id),
+away_player_6 integer references player(player_id),
+away_player_7 integer references player(player_id),
+away_player_8 integer references player(player_id),
+away_player_9 integer references player(player_id),
+away_player_10 integer references player(player_id),
+away_player_11 integer references player(player_id),
+PRIMARY KEY (Match_id)
+ );
+ 
+ 
+ column deleted 1, 12-55, 78 - end
+ 
+ 
+ 
+ 
+ CREATE TABLE Registered_user (
+ User_id INTEGER,
+ User_first_name VARCHAR2(30) NOT NULL,
+  User_last_name VARCHAR2(30) NOT NULL,
+ Gender VARCHAR2(6) NOT NULL,
+ Nationality VARCHAR2(20) NOT NULL,
+ Age INTEGER NOT NULL CHECK (Age >= 0 AND Age<120),
+ PRIMARY KEY (User_id)
+);
+
+
+
+
+CREATE TABLE Search (
+ Search_id INTEGER,
+ User_id INTEGER NOT NULL REFERENCES Registered_user(User_id),
+ Match_id INTEGER NOT NULL REFERENCES Matches(Match_id),
+ Player_id INTEGER NOT NULL REFERENCES Player(Player_id),
+ Team_id INTEGER NOT NULL REFERENCES Team(Team_id),
+ League_id INTEGER NOT NULL REFERENCES League(League_id),
+ PRIMARY KEY (Search_id)
+);
+
+
+
+
+ 
+ 
+ 
+ 

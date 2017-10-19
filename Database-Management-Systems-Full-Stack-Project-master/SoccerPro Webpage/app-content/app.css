@@ -1,0 +1,12 @@
+﻿a {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+body {
+	background-image: url('images/FootballImage.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+	color: white;
+}
